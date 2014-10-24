@@ -6,7 +6,6 @@ plugins {
 
 apply plugin: 'java'
 apply plugin: 'maven'
-apply plugin: 'wrapper'
 
 sourceCompatibility = 1.7
 
