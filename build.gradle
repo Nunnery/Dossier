@@ -33,11 +33,11 @@ uploadArchives {
     repositories {
         mavenDeployer {
             repository(url: "http://repo-topplethenun.rhcloud.com/nexus/content/repositories/releases/") {
-                authentication(userName: System.getenv("nexusUsername") ?: nexusUsername, password: System.getenv("nexusUsername") ?: nexusPassword)
+                authentication(userName: System.getenv("nexusUsername") ?: nexusUsername, password: System.getenv("nexusPassword") ?: nexusPassword)
             }
 
             snapshotRepository(url: "http://repo-topplethenun.rhcloud.com/nexus/content/repositories/snapshots/") {
-                authentication(userName: System.getenv("nexusUsername") ?: nexusUsername, password: System.getenv("nexusUsername") ?: nexusPassword)
+                authentication(userName: System.getenv("nexusUsername") ?: nexusUsername, password: System.getenv("nexusPassword") ?: nexusPassword)
             }
         }
     }
