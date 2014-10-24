@@ -1,0 +1,7 @@
+version: "0.0.1"
+database:
+  username: 'localuser'
+  password: 'localpass'
+  database: 'localdata'
+  host: 'localhost'
+  port: '3306'

@@ -1,0 +1,3 @@
+name: @NAME@
+version: @VERSION@
+main: info.faceland.dossier.Dossier

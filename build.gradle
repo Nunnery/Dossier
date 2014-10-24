@@ -1,0 +1,62 @@
+import org.apache.tools.ant.filters.ReplaceTokens
+
+plugins {
+    id "com.github.johnrengelman.shadow" version "1.1.2"
+}
+
+apply plugin: 'java'
+apply plugin: 'maven'
+apply plugin: 'wrapper'
+
+sourceCompatibility = 1.7
+
+group = 'info.faceland'
+archivesBaseName = 'dossier'
+version = '0.0.1-SNAPSHOT'
+
+jar.archiveName = "dossier.jar"
+
+repositories {
+    mavenCentral()
+    maven {
+        url "http://repo-topplethenun.rhcloud.com/nexus/content/groups/public/"
+    }
+}
+
+dependencies {
+    compile 'mysql:mysql-connector-java:5.1.25'
+    compile 'org.apache.commons:commons-pool2:2.2'
+    compile 'org.apache.commons:commons-dbcp2:2.0.1'
+    compile 'info.faceland:facecore:1.0.1-SNAPSHOT'
+}
+
+uploadArchives {
+    repositories {
+        mavenDeployer {
+            repository(url: "http://repo-topplethenun.rhcloud.com/nexus/content/repositories/releases/") {
+                authentication(userName: System.getenv("nexusUsername") ?: nexusUsername, password: System.getenv("nexusUsername") ?: nexusPassword)
+            }
+
+            snapshotRepository(url: "http://repo-topplethenun.rhcloud.com/nexus/content/repositories/snapshots/") {
+                authentication(userName: System.getenv("nexusUsername") ?: nexusUsername, password: System.getenv("nexusUsername") ?: nexusPassword)
+            }
+        }
+    }
+}
+
+processResources {
+    filter ReplaceTokens, tokens: [
+            VERSION: version + "-" + (System.getenv("DRONE") != null ? "drone" : "compiled") + "-" + (System.getenv("BUILD_ID") ?: "0"),
+            NAME: project.name
+    ]
+}
+
+shadowJar {
+    baseName = 'dossier'
+    classifier = ''
+    dependencies {
+        include(dependency('mysql:mysql-connector-java:5.1.25'))
+        include(dependency('org.apache.commons:commons-pool2:2.2'))
+        include(dependency('org.apache.commons:commons-dbcp2:2.0.1'))
+    }
+}
