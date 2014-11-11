@@ -27,7 +27,7 @@ dependencies {
     compile 'org.apache.commons:commons-pool2:2.2'
     compile 'org.apache.commons:commons-dbcp2:2.0.1'
     compile 'commons-logging:commons-logging:1.2'
-    compile 'info.faceland:facecore:1.0.1-SNAPSHOT'
+    compile 'info.faceland:facecore:2.0.0'
 }
 
 uploadArchives {
